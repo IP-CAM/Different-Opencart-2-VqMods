@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Ukrainian lang fix</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche@ukr.net</author>
+	<file name="catalog/language/ukrainian/product/product.php">
+		<operation>
+			<search position="replace" error="skip"><![CDATA[$_['text_related']                            = 'Схожі товари';]]></search>
+			<add><![CDATA[$_['text_related']                            = 'Рекомендовані товари'; ]]></add>
+		</operation>
+	</file>
+</modification>

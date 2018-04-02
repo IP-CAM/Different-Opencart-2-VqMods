@@ -1,0 +1,114 @@
+﻿
+<!--
+/*************************************************************************************************************
+*                               Alche simplemicrodata and redcolor price                                     *
+* http://forum.opencart-russia.ru/threads/mikrorazmetka-dannyx-schema-org-vnosim-izmenenija-v-shablony.1665/ *
+**************************************************************************************************************/
+-->
+
+<modification>
+    <id>Smart Microdata</id>
+    <version>1.0</version>
+    <vqmver>2.3.0</vqmver>
+    <author>ovife21</author>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<div class="container">]]>
+			</search>
+            <add>
+			<![CDATA[<div class="container" itemscope itemtype="http://schema.org/Product">]]>
+			</add>
+        </operation>       
+        <operation error="skip">
+            <search position="replace" index="1"><![CDATA[<li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>]]>
+			</search>
+            <add>
+			<![CDATA[
+				<li><a itemprop="url" href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            ]]>
+			</add>
+        </operation>     
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="elevatezoom-gallery" data-image="<?php echo $image['thumb']; ?>" data-zoom-image="<?php echo $image['popup']; ?>"><img src="<?php echo $image['thumb']; ?>" width="76" height="100" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></search>
+		    <add>
+			<![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="elevatezoom-gallery" data-image="<?php echo $image['thumb']; ?>" data-zoom-image="<?php echo $image['popup']; ?>"><img itemprop="image" src="<?php echo $image['thumb']; ?>" width="76" height="100" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]>
+			</add>
+        </operation>   	
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<div class="tab-pane active" id="tab-description"><?php echo $description; ?>]]></search>
+			<add>
+			<![CDATA[<div itemprop="description" class="tab-pane active" id="tab-description"><?php echo $description; ?>]]>
+			</add>
+        </operation>   
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<h2 class="page-title"><?php echo $heading_title; ?></h2>]]>
+			</search>
+            <add>
+			<![CDATA[<h2 itemprop="name"><?php echo $heading_title; ?></h2>]]>
+			</add>
+        </operation> 
+
+		<operation error="skip">
+            <search position="replace" index="1" offset = "1"><![CDATA[<?php if (!$special) { ?>]]>
+			</search>
+            <add>
+			<![CDATA[<?php if (!$special) { ?> 
+			<li itemprop="offers" itemscope itemtype="http://schema.org/Offer"> 
+			<span class="hidden"><link itemprop="availability" href="http://schema.org/<?php echo $stock_microdata; ?>" ></span>]]>
+			</add>
+        </operation> 
+
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<h2 class="product-price"><span id="formated_price" price="<?php echo $price_value; ?>"><?php echo $price; ?></span></h2>]]>
+			</search>
+            <add>
+			<![CDATA[<h2 class="product-price" style="color: red; font-weight: bold; font-size:24px"><span class = "hidden" itemprop="price" content = "<?php echo substr($price_value,0,-2); ?>"></span><span class = "hidden" itemprop="priceCurrency" content="UAH" ></span><span id="formated_price" price="<?php echo $price_value; ?>"><?php echo $price; ?></span></h2>]]>
+			</add>
+        </operation> 
+		
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<li><span><?php echo $text_model; ?></span> <?php echo $model; ?></li>]]>
+			</search>
+            <add>
+			<![CDATA[<li><span><?php echo $text_model; ?></span> <?php echo $model; ?> <span class = "hidden" itemprop="model"><?php echo $model; ?></span></li>]]>
+			</add>
+        </operation> 
+		
+		<operation error="skip">
+            <search position="replace" index="1"><![CDATA[<li><span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li>]]>
+			</search>
+            <add>
+			<![CDATA[<li><span><?php echo $text_manufacturer; ?></span> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li><span class="hidden" itemprop="brand"><?php echo $manufacturer; ?></span>]]>
+			</add>
+        </operation> 
+		
+
+		
+		
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation error="skip">
+            <search position="after"><![CDATA[$data['stock'] = $product_info['stock_status'];]]>
+			</search>
+            <add>
+			<![CDATA[$data['stock_microdata'] = 'OutOfStock';]]>
+			</add>
+		</operation> 
+		<operation error="skip">
+			 <search position="after"><![CDATA[$data['stock'] = $product_info['quantity'];]]>
+			</search>
+            <add>
+			<![CDATA[$data['stock_microdata'] = 'InStock';]]>
+			</add>
+		</operation> 
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['stock'] = $this->language->get('text_instock');]]>
+			</search>
+            <add>
+			<![CDATA[$data['stock_microdata'] = 'InStock';]]>
+			</add>
+        </operation>       
+	</file>
+</modification>

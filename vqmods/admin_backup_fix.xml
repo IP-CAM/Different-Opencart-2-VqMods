@@ -1,0 +1,16 @@
+<modification>
+	<id>Fix error in admin backup tool</id>
+	<version>1.0</version>
+	<vqmver>0.1</vqmver>
+	<author>Alche</author>
+	
+	 <file name="admin/view/template/tool/backup.tpl">
+        <operation>
+            <search position="replace" index="1">
+			<![CDATA[<label class="col-sm-2 control-label"><?php echo $entry_export; ?></label>]]></search>
+              <add><![CDATA[<label class="col-sm-2 control-label"><?php echo $entry_backup; ?></label>]]></add>
+        </operation>
+	</file>
+
+	
+</modification>

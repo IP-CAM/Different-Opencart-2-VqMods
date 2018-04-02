@@ -1,0 +1,53 @@
+<modification>
+	<id>No zoom effect on images</id>
+	<version>1.0.0009</version>
+	<vqmver>0.1</vqmver>
+	<author>Alche</author>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+        <operation>
+            <search offset="35"><![CDATA[<div class="image"><a class="thumbnail" href="<?php echo $popup; ?>" title="<?php echo $custom_imgtitle; ?>"><img id="tmzoom" src="<?php echo $thumb; ?>" data-zoom-image="<?php echo $popup; ?>" title="<?php echo $custom_imgtitle; ?>" alt="<?php echo $custom_alt; ?>" /></a></div> ]]></search>
+			
+            <add><![CDATA[           <div class="slider-item">
+                    <div class="product-block">          
+                       <a href="<?php echo $popup; ?>" title="<?php echo $custom_imgtitle; ?>" class="elevatezoom-gallery" data-image="<?php echo $thumb; ?>" data-zoom-image="<?php echo $popup; ?>"><img src="<?php echo $thumb; ?>"  title="<?php echo $custom_imgtitle; ?>" alt="<?php echo $custom_alt; ?>" /></a>
+                    </div>
+                    </div>
+      <?php } ?>
+      <?php if ($images) { ?>
+	  	 <?php 
+			$sliderFor = 5;
+			$imageCount = sizeof($images); 
+		 ?>	
+		 <div class="additional-carousel">	
+		  <?php if ($imageCount >= $sliderFor): ?>
+		  	<div class="customNavigation">
+				<span class="fa prev"></span>
+			<span class="fa next"></span>
+			</div> 
+		  <?php endif; ?>	      
+		  <div id="additional-carousel" class="image-additional <?php if ($imageCount >= $sliderFor){?>product-carousel<?php }?>">
+    	    
+	
+			
+			<?php foreach ($images as $image) { ?>
+				<div class="slider-item">
+				<div class="product-block">
+        			
+			<a href="<?php echo $image['popup']; ?>" title="<?php echo $custom_imgtitle; ?>" class="elevatezoom-gallery" data-image="<?php echo $image['thumb']; ?>" data-zoom-image="<?php echo $image['popup']; ?>"><img itemprop="image" src="<?php echo $image['thumb']; ?>" width="76" height="100" title="<?php echo $custom_imgtitle; ?>" alt="<?php echo $custom_alt; ?>" /></a>
+			
+				</div>
+				</div>		
+	        <?php } ?>				
+    	  </div>
+		  <span class="additional_default_width" style="display:none; visibility:hidden"></span>
+		  </div>
+		<?php } ?>		  	  
+
+		]]></add>
+        </operation>
+	
+		
+		
+	</file>
+	
+</modification>

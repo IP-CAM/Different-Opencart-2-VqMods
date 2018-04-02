@@ -1,0 +1,34 @@
+<modification>
+
+	<id>Text remove</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Alche</author>
+	
+	
+	<file name="catalog/language/*/payment/bank_transfer.php">
+		<operation error="skip">
+			<search position="replace"><![CDATA[['text_description']			= 'Будь-ласка перекажіть суму замовлення на наступні реквізити.';]]></search>
+			<add><![CDATA[['text_description']			= '';]]></add>
+		</operation>	
+		<operation error="skip">
+			<search position="replace"><![CDATA[['text_description']			= 'Пожалуйста, переведите общую сумму на следующий банковский счет: тут реквизиты';]]></search>
+			<add><![CDATA[['text_description']			= '';]]></add>
+		</operation>		
+		<operation error="skip">
+			<search position="replace"><![CDATA[['text_payment']			= 'Ваше замовлення буде відправлене після отримання оплати.';]]></search>
+			<add><![CDATA[['text_payment']			= '';]]></add>
+		</operation>	
+		<operation error="skip">
+			<search position="replace"><![CDATA[['text_payment']				= 'Заказ не будет обработан, пока деньги не поступят на наш расчетный счёт.';]]></search>
+			<add><![CDATA[['text_payment']			= '';]]></add>
+		</operation>	
+
+		
+	</file>
+	
+	
+	
+	
+</modification>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Remove date from blog</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche-alche@ukr.net</author>
+	
+	
+
+	<file name="catalog/view/theme/*/template/information/blogger.tpl">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[<div class="blog-date"> <?php echo $date; ?> <i class="fa fa-file-image-o"></i> </div>]]>
+			</search>
+			<add>
+				<![CDATA[ ]]>
+				</add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/information/blogger_blogs.tpl">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[<div class="blog-date"> <i class="fa fa-calendar"></i>  <?php echo $topic['date_added']; ?></div>]]>
+			</search>
+			<add>
+				<![CDATA[ ]]>
+				</add>
+		</operation>
+	</file>
+	
+	
+</modification>

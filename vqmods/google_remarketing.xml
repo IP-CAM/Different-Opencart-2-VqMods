@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Google Conversion and Remarketing code parameters can be editable in root config.php</id>
+	<version>1.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche-alche@ukr.net</author>
+	
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+		<operation>
+			<search position="before" offset="0">
+				<![CDATA[</body>]]>
+			</search>
+			<add>
+				<![CDATA[
+
+				<?php
+				if (R_GOOGLE_CONVERSION_ID != ""){
+				?>
+
+					<script type="text/javascript">
+					/* <![CDATA[ */
+					var google_conversion_id = <?php echo R_GOOGLE_CONVERSION_ID; ?>;
+					var google_custom_params = <?php echo R_GOOGLE_CUSTOM_PARAMS; ?>;
+					var google_remarketing_only = <?php echo R_GOOGLE_REMARKETING_ONLY; ?>;
+					/* ]]]]><![CDATA[> */
+					</script>
+					<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+					</script>
+					<noscript>
+					<div style="display:inline;">
+					<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/<?php echo R_GOOGLE_CONVERSION_ID; ?>/?value=0&amp;guid=ON&amp;script=0"/>
+					</div>
+					</noscript>
+				<?php
+				}?>
+
+	
+				
+				]]>
+				</add>
+		</operation>
+	</file>	
+	
+</modification>

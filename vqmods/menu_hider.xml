@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Hide megnorcategory on all pages</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche@ukr.net</author>
+	
+	
+	<file name="catalog/view/theme/*/template/module/megnorcategory.tpl">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[<div class="box-content">]]>
+			</search>
+			<add>
+				<![CDATA[<div class="box-content" style="display: none;">]]>
+				</add>
+		</operation>
+	</file>	
+</modification>

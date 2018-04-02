@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Additional phone number</id>
+	<version>1.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche-alche@ukr.net</author>
+	<file name="catalog/view/theme/*/template/information/contact.tpl">
+		<operation>
+			<search position="before" offset="0">
+				<![CDATA[ <?php if ($fax) { ?>]]>
+			</search>
+			<add>
+				<![CDATA[
+	                
+                  <address>(068) 616-62-08</address><br />
+				  <address>(050) 088-67-78</address><br />
+                  <br />
+
+	
+				
+				]]>
+				</add>
+		</operation>
+	</file>	
+	
+</modification>

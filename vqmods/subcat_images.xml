@@ -1,0 +1,38 @@
+<modification>
+	<id>Subcategory Images for OC 2.1.2</id>
+	<version>1.0</version>
+	<vqmver>0.1</vqmver>
+	<author>Alche</author>
+	 <file name="catalog/controller/product/category.php">
+        <operation>
+            <search position="replace" index="1" offset="3"><![CDATA[
+$data['categories'][] = array(
+            ]]></search>
+              <add><![CDATA[
+				if ($result['image']) {
+					$image = $this->model_tool_image->resize($result['image'], 100, 100);
+					}
+				else {
+					$image = $this->model_tool_image->resize('placeholder.png', 100, 100);
+					}
+				
+				$data['categories'][] = array(
+					'name'  => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+					'href'  => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url),
+					'thumb' => $image
+				);
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/category.tpl">
+        <operation>
+            <search position="replace" index="1" offset="0"><![CDATA[
+<li><a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></li>
+            ]]></search>
+            <add><![CDATA[<li><center><a href="<?php echo $category['href']; ?>"><img src="<?php echo $category['thumb']; ?>" alt="<?php echo $category['name']; ?>" /></a>
+			<a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></center></li>]]></add>
+        </operation>
+	</file>
+	
+</modification>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Red text color in product</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche@ukr.net</author>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[<h2 class="product-price"><span id="formated_price" price="<?php echo $price_value; ?>"><?php echo $price; ?></span></h2>]]>
+			</search>
+			<add>
+				<![CDATA[ 				
+				<h2 class="product-price" style="color: red; font-weight: bold; font-size:24px"><span id="formated_price" price="<?php echo $price_value; ?>"><?php echo $price; ?></span></h2>]]>
+				</add>
+		</operation>
+	</file>	
+</modification>

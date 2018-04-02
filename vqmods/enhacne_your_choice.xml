@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Enhance your choice text replacer</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche@ukr.net</author>
+	
+	<file name="catalog/language/ukrainian/product/product.php">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[$_['text_option']                             = 'Доступні опції';]]>
+			</search>
+			<add>
+				<![CDATA[ 				
+				$_['text_option']                             = 'Уточніть Ваш вибір:';]]>
+				</add>
+		</operation>
+	</file>	
+	<file name="catalog/language/russian/product/product.php">
+		<operation>
+			<search position="replace" error="skip">
+				<![CDATA[$_['text_option']                             = 'Доступные варианты';]]>
+			</search>
+			<add>
+				<![CDATA[ 				
+				$_['text_option']                             = 'Уточните Ваш выбор:';]]>
+				</add>
+		</operation>
+	</file>	
+	
+</modification>

@@ -1,0 +1,45 @@
+<modification>
+	<id>Product charecteristics in product card</id>
+	<version>1.0.0008</version>
+	<vqmver>0.1</vqmver>
+	<author>Alche</author>
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+        <operation>
+            <search offset="0"><![CDATA[<div itemprop="description" class="tab-pane active" id="tab-description"><?php echo $description; ?>]]></search>
+			
+            <add><![CDATA[<div itemprop="description" class="tab-pane active" id="tab-description"><?php echo $description; ?>
+			<?php if ($attribute_groups) { ?>
+              <table class="table table-bordered" style = "font-size: 16px;" >
+                <?php foreach ($attribute_groups as $attribute_group) { ?>
+                <thead>
+                  <tr>
+                    <td colspan="2"><strong ><?php echo $attribute_group['name']; ?></strong></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($attribute_group['attribute'] as $attribute) { ?>
+                  <tr>
+                    <td><?php echo $attribute['name']; ?></td>
+                    <td><?php echo $attribute['text']; ?></td>
+                  </tr>
+                  <?php } ?>
+                </tbody>
+                <?php } ?>
+              </table>
+			  <?php } ?>                        ]]></add>
+        </operation>
+		
+		<operation>
+            <search offset="0"><![CDATA[<div class="tab-pane" id="tab-specification">]]></search>
+			<add><![CDATA[<div class="tab-pane" id="tab-specification" style = "font-size: 16px;">]]></add>
+		</operation>
+		
+		<operation>
+            <search offset="0"><![CDATA[<label class="control-label"><?php echo $option['name']; ?></label>]]></search>
+			<add><![CDATA[<label style="font-weight:bold; color:black;" class="control-label"><?php echo $option['name']; ?></label>]]></add>
+		</operation>
+		
+		
+	</file>
+	
+</modification>

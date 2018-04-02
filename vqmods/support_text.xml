@@ -1,0 +1,40 @@
+<modification>
+
+	<id>Add support contact information</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Alche</author>
+	
+	
+	<file name="catalog/controller/common/footer.php">
+		<operation error="skip">
+			<search position="after"><![CDATA[$data['download'] = $this->url->link('account/download', '', 'SSL');]]></search>
+			<add><![CDATA[		$data['support'] = sprintf($this->language->get('text_support'),'','');]]></add>
+		</operation>				
+	</file>
+	
+	
+	
+	<file name="catalog/language/ukrainian/common/footer.php">
+		<operation error="skip">
+			<search position="bottom"></search>
+			<add><![CDATA[$_['text_support']      = '<a href="mailto:alche@ukr.net">Технічна підтримка та супровід сайту Alche™</a>';]]></add>
+		</operation>				
+	</file>
+	<file name="catalog/language/russian/common/footer.php">
+		<operation error="skip">
+			<search position="bottom"></search>
+			<add><![CDATA[$_['text_support']      = '<a href="mailto:alche@ukr.net">Техническая поддержка и сопровждение сайта Alche™</a>';]]></add>
+		</operation>				
+	</file>
+	
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+        <operation>
+            <search replace="after" index="1" offset="0"><![CDATA[<p class="powered"><?php echo $powered; ?>]]></search>
+            <add><![CDATA[  <p class="powered"><?php echo $support; ?><br><?php echo $powered; ?></p> ]]></add>
+        </operation>
+	</file>
+	
+	
+</modification>
+

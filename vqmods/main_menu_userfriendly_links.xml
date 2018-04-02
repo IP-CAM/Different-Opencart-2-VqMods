@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Fix for user friendly links on the page (require for SEO)</id>
+	<version>1.0.0</version>
+	<vqmver>2.0.1</vqmver>
+	<author>alche@ukr.net</author>
+	
+	
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+		<operation>
+			<search position="replace" error="skip" offset = "2">
+				<![CDATA[<li><a href="/index.php?route=information/information&information_id=7"><?php echo $text_voucher; ?></a></li>]]>
+			</search>
+			<add>
+				<![CDATA[]]>
+				</add>
+		</operation>
+	</file>	
+	
+		
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+        <operation>
+            <search replace="after" index="1" offset="1">
+				<![CDATA[<li class="first level0"><a href="/index.php?route=information/information&information_id=6"><?php echo $text_affiliate; ?></a></li>]]>
+			</search>
+            <add>
+				<![CDATA[<li class="first level0"><a href="<?php echo $data ['informations'][2]['href']; ?>"><?php echo $data ['informations'][2]['title']; ?></a></li> 
+				<li class="first level0"><a href="<?php echo $data ['informations'][1]['href']; ?>"><?php echo $data ['informations'][1]['title']; ?></a></li> ]]>
+				
+			</add>
+		</operation>
+		
+	</file>	
+	
+	
+	
+	
+	<file name="catalog/controller/common/header.php">
+        <operation>
+            <search position="after">
+				<![CDATA[$this->load->language('common/header');]]>
+			</search>
+            <add>
+				<![CDATA[
+		$this->load->model('catalog/information');
+		$data['informations'] = array();
+		foreach ($this->model_catalog_information->getInformations() as $result) {
+			if ($result['bottom']) {
+					$data['informations'][] = array(
+					'title' => $result['title'],
+					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+					);
+			}
+		}]]>
+				
+			</add>
+		</operation>
+		
+	</file>	
+	
+</modification>

@@ -1,0 +1,31 @@
+<modification>
+
+	<id>Use Customized Stylesheet for 5 goods inline when catalog view</id>
+	<version>1.0.0</version>
+	<vqmver>1.2.3</vqmver>
+	<author>Alche</author>
+
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+        <operation error="skip"><!-- Use Customised Stylesheet -->
+            <search position="replace"><![CDATA[
+<link href="catalog/view/theme/<?php echo $mytemplate; ?>/stylesheet/stylesheet.css" rel="stylesheet">
+            ]]></search>
+            <add trim="true"><![CDATA[
+<link href="catalog/view/theme/<?php echo $mytemplate; ?>/stylesheet/stylesheet5.css" rel="stylesheet">
+
+			]]></add>
+        </operation>
+		
+		<operation error="skip"><!-- Use Customised Stylesheet -->
+            <search position="replace"><![CDATA[
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/<?php echo $mytemplate; ?>/stylesheet/megnor/bootstrap.min.css" />
+            ]]></search>
+            <add trim="true"><![CDATA[
+<link rel="stylesheet" type="text/css" href="catalog/view/theme/<?php echo $mytemplate; ?>/stylesheet/megnor/bootstrap.min5.css" />
+			]]></add>
+        </operation>
+		
+		
+	</file>
+	
+</modification>

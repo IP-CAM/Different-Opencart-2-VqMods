@@ -1,0 +1,84 @@
+<modification>
+
+	<id>Add pics in megnortB</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Alche</author>
+	
+
+	
+	
+	
+	
+		<file name="catalog/controller/module/megnorcategory.php">
+		<operation>
+				<search replace="after" index="1" offset="1"><![CDATA[$this->load->model('catalog/category');]]></search>
+                        <add><![CDATA[$this->load->model('tool/image'); 
+		
+		$this->load->model('catalog/category');]]>
+		</add>
+		</operation>
+		
+		<operation>
+		  <search replace="after" index="1" offset="14"><![CDATA[foreach ($categories as $category) {]]></search>
+                        <add><![CDATA[foreach ($categories as $category) {
+			
+			if ($category['top']) {
+			
+			$children_data = array();
+
+			$children = $this->model_catalog_category->getCategories($category['category_id']);
+
+			///////  Megnor extra code for 3 level categories start  ///////
+				
+				foreach ($children as $child) {
+					$filter_data = array(
+						'filter_category_id'  => $child['category_id'],
+						'filter_sub_category' => true
+					);			
+
+
+					if ($child ['image']) {$image = $this->model_tool_image->resize($child['image'], 100, 100);}
+					else {$image = $this->model_tool_image->resize('placeholder.png', 100, 100);}]]></add>
+		</operation>
+		
+		
+		
+        <operation>
+		  <search replace="after" index="1"><![CDATA['href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),]]></search>
+                        <add><![CDATA['thumb'  => $image,
+							'href'  => $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']),]]></add>
+		</operation>
+	</file>
+	
+	
+	<file name="catalog/view/theme/*/template/module/megnorcategory.tpl">
+        <operation>
+            <search replace="after" index="1" offset="8"><![CDATA[<?php if ($category['children'][$i]['children_level2']) { ?>]]></search>
+                        <add><![CDATA[ ]]></add>
+		</operation>
+		
+		
+		 <operation>
+            <search replace="after" index="1" ><![CDATA[<li class="categorycolumn">]]></search>
+                        <add><![CDATA[ <li class="categorycolumn" style="vertical-align:top;">]]></add>
+		</operation>
+		
+		
+		
+		<operation>
+		
+					<search replace="after" index="1" offset="2"><![CDATA[<a href="<?php echo $category['children'][$i]['href']; ?>" class="activSub" <?php /*?>onmouseover='JavaScript:openSubMenu("<?php echo $category['children'][$i]['id']; ?>")'<?php */?>><?php echo $category['children'][$i]['name'];?></a> 					]]></search>
+                    <add><![CDATA[<center><a href="<?php echo $category['children'][$i]['href']; ?>"> <img src="<?php echo $category['children'][$i]['thumb']; ?>" class="activSub"></a><a href="<?php echo $category['children'][$i]['href']; ?>" class="activSub" <?php /*?>onmouseover='JavaScript:openSubMenu("<?php echo $category['children'][$i]['id']; ?>")'<?php */?>><?php echo $category['children'][$i]['name'];?></a></center>
+					<?php } else { ?>	
+					<center><a href="<?php echo $category['children'][$i]['href']; ?>"> <img src="<?php echo $category['children'][$i]['thumb']; ?>"</a><a href="<?php echo $category['children'][$i]['href']; ?>" class="activSub" <?php /*?>onmouseover='JavaScript:openSubMenu("<?php echo $category['children'][$i]['id']; ?>")'<?php */?>><?php echo $category['children'][$i]['name'];?></a></center>
+					
+					]]></add>
+
+        </operation>
+		
+	</file>
+	
+	
+</modification>
+
